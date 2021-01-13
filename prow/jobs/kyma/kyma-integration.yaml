@@ -313,7 +313,7 @@ presubmits: # runs on PRs
           base_ref: master
     
     - name: pre-master-kyma-integration-k3s
-      optional: true
+      optional: false
       cluster: untrusted-workload
       branches:
       - ^master$
@@ -409,7 +409,7 @@ presubmits: # runs on PRs
       <<: *gke_job_template
       run_if_changed: "^((resources\\S+|installation\\S+|tools/kyma-installer\\S+)(\\.[^.][^.][^.]+$|\\.[^.][^dD]$|\\.[^mM][^.]$|\\.[^.]$|/[^.]+$))"
       labels:
-        preset-build-release: "true"
+        preset-build-pr: "true"
         <<: *gke_job_labels_template
       extra_refs:
         - org: kyma-project
@@ -423,7 +423,7 @@ presubmits: # runs on PRs
       <<: *gke_job_template
       run_if_changed: "^((resources\\S+|installation\\S+|tools/kyma-installer\\S+)(\\.[^.][^.][^.]+$|\\.[^.][^dD]$|\\.[^mM][^.]$|\\.[^.]$|/[^.]+$))"
       labels:
-        preset-build-release: "true"
+        preset-build-pr: "true"
         <<: *gke_job_labels_template
       extra_refs:
         - org: kyma-project
@@ -437,7 +437,7 @@ presubmits: # runs on PRs
       <<: *gke_job_template
       run_if_changed: "^((resources\\S+|installation\\S+|tools/kyma-installer\\S+)(\\.[^.][^.][^.]+$|\\.[^.][^dD]$|\\.[^mM][^.]$|\\.[^.]$|/[^.]+$))"
       labels:
-        preset-build-release: "true"
+        preset-build-pr: "true"
         <<: *gke_job_labels_template
       extra_refs:
         - org: kyma-project
@@ -466,7 +466,7 @@ presubmits: # runs on PRs
       <<: *gke_upgrade_job_template
       run_if_changed: "^((resources\\S+|installation\\S+|tests/end-to-end/upgrade/chart/upgrade/\\S+|tests/end-to-end/external-solution-integration/chart/external-solution/\\S+|tools/kyma-installer\\S+)(\\.[^.][^.][^.]+$|\\.[^.][^dD]$|\\.[^mM][^.]$|\\.[^.]$|/[^.]+$))"
       labels:
-        preset-build-release: "true"
+        preset-build-pr: "true"
         preset-gke-upgrade-pre-release-job: "true"
         <<: *gke_job_labels_template
       extra_refs:
@@ -479,7 +479,7 @@ presubmits: # runs on PRs
       <<: *gke_upgrade_job_template
       run_if_changed: "^((resources\\S+|installation\\S+|tests/end-to-end/upgrade/chart/upgrade/\\S+|tests/end-to-end/external-solution-integration/chart/external-solution/\\S+|tools/kyma-installer\\S+)(\\.[^.][^.][^.]+$|\\.[^.][^dD]$|\\.[^mM][^.]$|\\.[^.]$|/[^.]+$))"
       labels:
-        preset-build-release: "true"
+        preset-build-pr: "true"
         preset-gke-upgrade-pre-release-job: "true"
         <<: *gke_job_labels_template
       extra_refs:
@@ -492,7 +492,7 @@ presubmits: # runs on PRs
       <<: *gke_upgrade_job_template
       run_if_changed: "^((resources\\S+|installation\\S+|tests/end-to-end/upgrade/chart/upgrade/\\S+|tests/end-to-end/external-solution-integration/chart/external-solution/\\S+|tools/kyma-installer\\S+)(\\.[^.][^.][^.]+$|\\.[^.][^dD]$|\\.[^mM][^.]$|\\.[^.]$|/[^.]+$))"
       labels:
-        preset-build-release: "true"
+        preset-build-pr: "true"
         preset-gke-upgrade-pre-release-job: "true"
         <<: *gke_job_labels_template
       extra_refs:
@@ -519,7 +519,7 @@ presubmits: # runs on PRs
       <<: *gke_central_job_template
       run_if_changed: "^((resources/core/templates/tests\\S+|resources/application-connector\\S+|installation\\S+|tools/kyma-installer\\S+)(\\.[^.][^.][^.]+$|\\.[^.][^dD]$|\\.[^mM][^.]$|\\.[^.]$|/[^.]+$))"
       labels:
-        preset-build-release: "true"
+        preset-build-pr: "true"
         <<: *gke_job_labels_template
       extra_refs:
         - <<: *test_infra_ref
@@ -531,7 +531,7 @@ presubmits: # runs on PRs
       <<: *gke_central_job_template
       run_if_changed: "^((resources/core/templates/tests\\S+|resources/application-connector\\S+|installation\\S+|tools/kyma-installer\\S+)(\\.[^.][^.][^.]+$|\\.[^.][^dD]$|\\.[^mM][^.]$|\\.[^.]$|/[^.]+$))"
       labels:
-        preset-build-release: "true"
+        preset-build-pr: "true"
         <<: *gke_job_labels_template
       extra_refs:
         - <<: *test_infra_ref
@@ -543,7 +543,7 @@ presubmits: # runs on PRs
       <<: *gke_central_job_template
       run_if_changed: "^((resources/core/templates/tests\\S+|resources/application-connector\\S+|installation\\S+|tools/kyma-installer\\S+)(\\.[^.][^.][^.]+$|\\.[^.][^dD]$|\\.[^mM][^.]$|\\.[^.]$|/[^.]+$))"
       labels:
-        preset-build-release: "true"
+        preset-build-pr: "true"
         <<: *gke_job_labels_template
       extra_refs:
         - <<: *test_infra_ref
@@ -695,7 +695,7 @@ postsubmits:
         - ^release-1.19$
       labels:
         preset-log-collector-slack-token: "true"
-        preset-build-master: "true"
+        preset-build-release: "true"
         <<: *gke_job_labels_template
       extra_refs:
         - <<: *test_infra_ref
@@ -711,7 +711,7 @@ postsubmits:
       branches:
         - ^release-1.19$
       labels:
-        preset-build-master: "true"
+        preset-build-release: "true"
         preset-log-collector-slack-token: "true"
         <<: *gke_job_labels_template
       extra_refs:
@@ -730,7 +730,7 @@ postsubmits:
       labels:
         preset-gke-upgrade-post-job: "true"
         preset-log-collector-slack-token: "true"
-        preset-build-master: "true"
+        preset-build-release: "true"
         <<: *gke_job_labels_template
       extra_refs:
         - <<: *test_infra_ref
@@ -763,7 +763,7 @@ postsubmits:
         - ^release-1.18$
       labels:
         preset-log-collector-slack-token: "true"
-        preset-build-master: "true"
+        preset-build-release: "true"
         <<: *gke_job_labels_template
       extra_refs:
         - <<: *test_infra_ref
@@ -779,7 +779,7 @@ postsubmits:
       branches:
         - ^release-1.18$
       labels:
-        preset-build-master: "true"
+        preset-build-release: "true"
         preset-log-collector-slack-token: "true"
         <<: *gke_job_labels_template
       extra_refs:
@@ -798,7 +798,7 @@ postsubmits:
       labels:
         preset-gke-upgrade-post-job: "true"
         preset-log-collector-slack-token: "true"
-        preset-build-master: "true"
+        preset-build-release: "true"
         <<: *gke_job_labels_template
       extra_refs:
         - <<: *test_infra_ref
@@ -831,7 +831,7 @@ postsubmits:
         - ^release-1.17$
       labels:
         preset-log-collector-slack-token: "true"
-        preset-build-master: "true"
+        preset-build-release: "true"
         <<: *gke_job_labels_template
       extra_refs:
         - <<: *test_infra_ref
@@ -847,7 +847,7 @@ postsubmits:
       branches:
         - ^release-1.17$
       labels:
-        preset-build-master: "true"
+        preset-build-release: "true"
         preset-log-collector-slack-token: "true"
         <<: *gke_job_labels_template
       extra_refs:
@@ -866,7 +866,7 @@ postsubmits:
       labels:
         preset-gke-upgrade-post-job: "true"
         preset-log-collector-slack-token: "true"
-        preset-build-master: "true"
+        preset-build-release: "true"
         <<: *gke_job_labels_template
       extra_refs:
         - <<: *test_infra_ref
